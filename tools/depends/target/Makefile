@@ -15,7 +15,8 @@ DEPENDS = \
 	taglib libusb libnfs \
 	pythonmodule-pil pythonmodule-pycryptodome pythonmodule-setuptools \
 	libxslt ffmpeg crossguid libudfread \
-	libdvdread libdvdnav libdvdcss p8-platform flatbuffers dav1d xz
+	libdvdread libdvdnav libdvdcss p8-platform flatbuffers dav1d xz \
+	date
 
 ifeq ($(ENABLE_GPLV3),yes)
   DEPENDS+=samba-gplv3 libcdio-gplv3
