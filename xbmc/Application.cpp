@@ -344,6 +344,8 @@ void CApplication::Preflight()
 #endif
 }
 
+#include "platform/posix/PosixTimezone.h"
+
 bool CApplication::Create(const CAppParamParser &params)
 {
   // Grab a handle to our thread to be used later in identifying the render thread.
@@ -360,6 +362,8 @@ bool CApplication::Create(const CAppParamParser &params)
 
   m_pSettingsComponent.reset(new CSettingsComponent());
   m_pSettingsComponent->Init(params);
+
+  g_timezone.Init();
 
   // Announement service
   m_pAnnouncementManager = std::make_shared<ANNOUNCEMENT::CAnnouncementManager>();
