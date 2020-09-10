@@ -278,8 +278,8 @@ namespace XBMCAddon
     {
       DelayedCallGuard dcguard(languageHook);
       std::string value;
-      KODI::TIME::SystemTime timedate;
-      KODI::TIME::GetLocalTime(&timedate);
+
+      auto timedate = CDateTime::GetCurrentDateTime();
 
       if (!heading.empty())
       {
@@ -287,13 +287,11 @@ namespace XBMCAddon
         {
           if (!defaultt.empty() && defaultt.size() == 10)
           {
-            const std::string& sDefault = defaultt;
-            timedate.day = atoi(sDefault.substr(0, 2).c_str());
-            timedate.month = atoi(sDefault.substr(3, 4).c_str());
-            timedate.year = atoi(sDefault.substr(sDefault.size() - 4).c_str());
+            const std::string sDefault = defaultt;
+            timedate.SetFromDBDate(sDefault.substr(sDefault.size() - 4) + "-" + sDefault.substr(3, 4) + "-" + sDefault.substr(0, 2));
           }
           if (CGUIDialogNumeric::ShowAndGetDate(timedate, heading))
-            value = StringUtils::Format("%2d/%2d/%4d", timedate.day, timedate.month, timedate.year);
+            value = StringUtils::Format("%2d/%2d/%4d", timedate.GetDay(), timedate.GetMonth(), timedate.GetYear());
           else
             return emptyString;
         }
@@ -301,12 +299,11 @@ namespace XBMCAddon
         {
           if (!defaultt.empty() && defaultt.size() == 5)
           {
-            const std::string& sDefault = defaultt;
-            timedate.hour = atoi(sDefault.substr(0, 2).c_str());
-            timedate.minute = atoi(sDefault.substr(3, 2).c_str());
+            const std::string sDefault = defaultt;
+            timedate.SetFromDBTime(sDefault.substr(0, 2) + ":" + sDefault.substr(3, 2));
           }
           if (CGUIDialogNumeric::ShowAndGetTime(timedate, heading))
-            value = StringUtils::Format("%2d:%02d", timedate.hour, timedate.minute);
+            value = StringUtils::Format("%2d:%02d", timedate.GetHour(), timedate.GetMinute());
           else
             return emptyString;
         }
@@ -358,8 +355,8 @@ namespace XBMCAddon
     {
       DelayedCallGuard dcguard(languageHook);
       std::string value(defaultt);
-      KODI::TIME::SystemTime timedate;
-      KODI::TIME::GetLocalTime(&timedate);
+
+      auto timedate = CDateTime::GetCurrentDateTime();
 
       switch (type)
       {
@@ -380,14 +377,12 @@ namespace XBMCAddon
           {
             if (!defaultt.empty() && defaultt.size() == 10)
             {
-              const std::string& sDefault = defaultt;
-              timedate.day = atoi(sDefault.substr(0, 2).c_str());
-              timedate.month = atoi(sDefault.substr(3, 4).c_str());
-              timedate.year = atoi(sDefault.substr(sDefault.size() - 4).c_str());
+              const std::string sDefault = defaultt;
+              timedate.SetFromDBDate(sDefault.substr(sDefault.size() - 4) + "-" + sDefault.substr(3, 4) + "-" + sDefault.substr(0, 2));
             }
             if (CGUIDialogNumeric::ShowAndGetDate(timedate, heading))
               value =
-                  StringUtils::Format("%2d/%2d/%4d", timedate.day, timedate.month, timedate.year);
+                  StringUtils::Format("%2d/%2d/%4d", timedate.GetDay(), timedate.GetMonth(), timedate.GetYear());
             else
               value = emptyString;
           }
@@ -396,12 +391,11 @@ namespace XBMCAddon
           {
             if (!defaultt.empty() && defaultt.size() == 5)
             {
-              const std::string& sDefault = defaultt;
-              timedate.hour = atoi(sDefault.substr(0, 2).c_str());
-              timedate.minute = atoi(sDefault.substr(3, 2).c_str());
+              const std::string sDefault = defaultt;
+              timedate.SetFromDBTime(sDefault.substr(0, 2) + ":" + sDefault.substr(3, 2));
             }
             if (CGUIDialogNumeric::ShowAndGetTime(timedate, heading))
-              value = StringUtils::Format("%2d:%02d", timedate.hour, timedate.minute);
+              value = StringUtils::Format("%2d:%02d", timedate.GetHour(), timedate.GetMinute());
             else
               value = emptyString;
           }
