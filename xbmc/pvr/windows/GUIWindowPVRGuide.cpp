@@ -679,7 +679,7 @@ bool CGUIWindowPVRGuideBase::RefreshTimelineItems()
 
       CDateTime startDate(group->GetFirstEPGDate());
       CDateTime endDate(group->GetLastEPGDate());
-      const CDateTime currentDate(CDateTime::GetCurrentDateTime().GetAsUTCDateTime());
+      const CDateTime currentDate(CDateTime::GetUTCDateTime());
 
       if (!startDate.IsValid())
         startDate = currentDate;
