@@ -38,7 +38,28 @@ if(ENABLE_INTERNAL_DATE)
                       DOWNLOAD_DIR ${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}/download
                       PREFIX ${CORE_BUILD_DIR}/date
                       INSTALL_DIR ${CMAKE_BINARY_DIR}/${CORE_BUILD_DIR}
-                      CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_CXX_STANDARD=14 -DUSE_SYSTEM_TZ_DB=OFF -DMANUAL_TZ_DB=ON -DUSE_TZ_DB_IN_DOT=OFF -DBUILD_SHARED_LIBS=OFF -DDISABLE_STRING_VIEW=ON -DBUILD_TZ_LIB=ON -DCMAKE_INSTALL_LIBDIR=lib
+                      CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+                           -DCMAKE_CXX_STANDARD=14
+                           -DUSE_SYSTEM_TZ_DB=OFF
+                           -DMANUAL_TZ_DB=ON
+                           -DUSE_TZ_DB_IN_DOT=OFF
+                           -DBUILD_SHARED_LIBS=OFF
+                           -DDISABLE_STRING_VIEW=ON
+                           -DBUILD_TZ_LIB=ON
+                           -DCMAKE_INSTALL_LIBDIR=lib
+                           -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+                           -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+                           -DCMAKE_AR=${CMAKE_AR}
+                           -DCMAKE_OBJCOPY=${CMAKE_OBJCOPY}
+                           -DCMAKE_OBJDUMP=${CMAKE_OBJDUMP}
+                           -DCMAKE_RANLIB=${CMAKE_RANLIB}
+                           -DCMAKE_STRIP=${CMAKE_STRIP}
+                           -DCMAKE_C_FLAGS=${CMAKE_C_FLAGS}
+                           -DCMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS}
+                           -DCMAKE_EXE_LINKER_FLAGS=${CMAKE_EXE_LINKER_FLAGS}
+                           -DCMAKE_MODULE_LINKER_FLAGS=${CMAKE_MODULE_LINKER_FLAGS}
+                           -DCMAKE_SHARED_LINKER_FLAGS=${CMAKE_SHARED_LINKER_FLAGS}
+                           -DCMAKE_STATIC_LINKER_FLAGS=${CMAKE_STATIC_LINKER_FLAGS}
                       BUILD_BYPRODUCTS ${DATE_LIBRARY})
 
   externalproject_add_step(Date install_headers
