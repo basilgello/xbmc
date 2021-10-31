@@ -71,6 +71,13 @@ if(ENABLE_INTERNAL_DATE)
   list(APPEND GLOBAL_TARGET_DEPS Date)
 endif()
 
+find_path(DATE_INCLUDE_DIR NAMES date.h)
+find_library(DATE_LIBRARY_RELEASE NAMES date-tz)
+find_library(DATE_LIBRARY_DEBUG NAMES date-tzd)
+
+include(SelectLibraryConfigurations)
+select_library_configurations(DATE)
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Date
                                   REQUIRED_VARS DATE_LIBRARY DATE_INCLUDE_DIR

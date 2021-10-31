@@ -344,7 +344,9 @@ void CApplication::Preflight()
 #endif
 }
 
+#if defined(TARGET_POSIX)
 #include "platform/posix/PosixTimezone.h"
+#endif
 
 bool CApplication::Create(const CAppParamParser &params)
 {
@@ -363,7 +365,9 @@ bool CApplication::Create(const CAppParamParser &params)
   m_pSettingsComponent.reset(new CSettingsComponent());
   m_pSettingsComponent->Init(params);
 
+#if defined(TARGET_POSIX)
   g_timezone.Init();
+#endif
 
   // Announement service
   m_pAnnouncementManager = std::make_shared<ANNOUNCEMENT::CAnnouncementManager>();
@@ -536,7 +540,7 @@ bool CApplication::Create(const CAppParamParser &params)
   // must be done after stage two when addon manager is initialized
   AddonPtr addon;
   if (!CServiceBroker::GetAddonMgr().GetAddon("resource.timezone", addon,
-                                              ADDON::ADDON_RESOURCE_TIMEZONE, true))
+                                              ADDON::ADDON_RESOURCE_TIMEZONE, ADDON::OnlyEnabled::YES))
   {
     CLog::LogF(LOGDEBUG, "failed to find resource.timezone");
     return false;

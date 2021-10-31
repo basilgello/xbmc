@@ -65,12 +65,12 @@ bool win32_exception::write_minidump(EXCEPTION_POINTERS* pEp)
   bool returncode = false;
   std::string dumpFileName;
   std::wstring dumpFileNameW;
-  KODI::TIME::SystemTime stLocalTime;
-  KODI::TIME::GetLocalTime(&stLocalTime);
+  SYSTEMTIME stLocalTime;
+  GetLocalTime(&stLocalTime);
 
   dumpFileName = StringUtils::Format(
-      "kodi_crashlog-%s-%04d%02d%02d-%02d%02d%02d.dmp", mVersion.c_str(), stLocalTime.year,
-      stLocalTime.month, stLocalTime.day, stLocalTime.hour, stLocalTime.minute, stLocalTime.second);
+      "kodi_crashlog-%s-%04d%02d%02d-%02d%02d%02d.dmp", mVersion.c_str(), stLocalTime.wYear,
+      stLocalTime.wMonth, stLocalTime.wDay, stLocalTime.wHour, stLocalTime.wMinute, stLocalTime.wSecond);
 
   dumpFileName = CWIN32Util::SmbToUnc(URIUtils::AddFileToFolder(CWIN32Util::GetProfilePath(), CUtil::MakeLegalFileName(dumpFileName)));
 
@@ -137,8 +137,8 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
   std::wstring dumpFileNameW;
   CHAR cTemp[STACKWALK_MAX_NAMELEN];
   DWORD dwBytes;
-  KODI::TIME::SystemTime stLocalTime;
-  KODI::TIME::GetLocalTime(&stLocalTime);
+  SYSTEMTIME stLocalTime;
+  GetLocalTime(&stLocalTime);
   bool returncode = false;
   STACKFRAME64 frame = { 0 };
   HANDLE hCurProc = GetCurrentProcess();
@@ -168,8 +168,8 @@ bool win32_exception::write_stacktrace(EXCEPTION_POINTERS* pEp)
     goto cleanup;
 
   dumpFileName = StringUtils::Format(
-      "kodi_stacktrace-%s-%04d%02d%02d-%02d%02d%02d.txt", mVersion.c_str(), stLocalTime.year,
-      stLocalTime.month, stLocalTime.day, stLocalTime.hour, stLocalTime.minute, stLocalTime.second);
+      "kodi_stacktrace-%s-%04d%02d%02d-%02d%02d%02d.txt", mVersion.c_str(), stLocalTime.wYear,
+      stLocalTime.wMonth, stLocalTime.wDay, stLocalTime.wHour, stLocalTime.wMinute, stLocalTime.wSecond);
 
   dumpFileName = CWIN32Util::SmbToUnc(URIUtils::AddFileToFolder(CWIN32Util::GetProfilePath(), CUtil::MakeLegalFileName(dumpFileName)));
 
