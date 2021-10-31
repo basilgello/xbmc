@@ -85,7 +85,7 @@ mark_as_advanced(DATE_INCLUDE_DIR DATE_LIBRARY)
 
 # not sure where this should go so it lives here for now
 
-set(TZDATA_VERSION "2020a")
+set(TZDATA_VERSION "2021e")
 
 # allow user to override the download URL with a local tarball
 # needed for offline build envs
