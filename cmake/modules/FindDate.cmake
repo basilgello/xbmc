@@ -69,14 +69,14 @@ if(ENABLE_INTERNAL_DATE)
 
   set_target_properties(Date PROPERTIES FOLDER "External Projects")
   list(APPEND GLOBAL_TARGET_DEPS Date)
+else()
+  find_path(DATE_INCLUDE_DIR NAMES date.h)
+  find_library(DATE_LIBRARY_RELEASE NAMES date-tz)
+  find_library(DATE_LIBRARY_DEBUG NAMES date-tzd)
+
+  include(SelectLibraryConfigurations)
+  select_library_configurations(DATE)
 endif()
-
-find_path(DATE_INCLUDE_DIR NAMES date.h)
-find_library(DATE_LIBRARY_RELEASE NAMES date-tz)
-find_library(DATE_LIBRARY_DEBUG NAMES date-tzd)
-
-include(SelectLibraryConfigurations)
-select_library_configurations(DATE)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(Date
