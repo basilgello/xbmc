@@ -42,7 +42,6 @@ set(HEADERS AutoSwitch.h
             DatabaseManager.h
             DbUrl.h
             DllPaths.h
-            DllPaths_win32.h
             DynamicDll.h
             FileItem.h
             FileItemListModification.h
