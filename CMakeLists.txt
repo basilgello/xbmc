@@ -70,6 +70,7 @@ option(ENABLE_INTERNAL_FFMPEG "Enable internal ffmpeg?" OFF)
 # These are built for all platforms not using system libs or disabled by user
 dependent_option(ENABLE_INTERNAL_FLATBUFFERS "Enable internal flatbuffers?")
 dependent_option(ENABLE_INTERNAL_FMT "Enable internal fmt?")
+dependent_option(ENABLE_INTERNAL_LIBDVD "Enable internal libdvd* libs?")
 dependent_option(ENABLE_INTERNAL_NFS "Enable internal libnfs?")
 dependent_option(ENABLE_INTERNAL_PCRE "Enable internal pcre?")
 dependent_option(ENABLE_INTERNAL_SPDLOG "Enable internal spdlog?")
